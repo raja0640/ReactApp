@@ -1,0 +1,3 @@
+dotnet ef migrations add <name of the migration> -s API -p Persistence
+
+dotnewt watch --no--hot-reload
