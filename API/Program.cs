@@ -1,6 +1,7 @@
 using Jnr.Technologies.Persistence;
 using Jnr.Technologies.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
+using Jnr.Technologies.Shared.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,15 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 builder.Services.AddApiVersioning(options => options.ReportApiVersions = true);
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(Constants.Policies.CorsPolicy, policy =>
+    {
+        policy.AllowAnyHeader()
+            .AllowAnyMethod()
+            .WithOrigins("http://localhost:3000");
+    });
+});
 
 var app = builder.Build();
 
@@ -27,6 +37,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(Constants.Policies.CorsPolicy);
 app.UseAuthorization();
 app.MapControllers();
 

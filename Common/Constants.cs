@@ -7,4 +7,10 @@ public static class Constants
         public const string VersionOne = "1";
         public const string RoutePrefix = "api/v{version:apiVersion}";
     }
+    
+    public static class Policies
+    {
+        public const string CorsPolicy = "CorsPolicy";
+    }           
+    
 }
